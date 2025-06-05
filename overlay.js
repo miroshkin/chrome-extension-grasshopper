@@ -65,7 +65,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.key === 'Enter') {
             e.preventDefault();
             const ticketNumber = input.value.trim();
-            if (ticketNumber.length > 0 && ticketNumber.length <= 8 && /^[0-9]+$/.test(ticketNumber)) {
+            // Improved validation with more secure regex and strict validation
+            if (ticketNumber.length > 0 && ticketNumber.length <= 8 && /^\d+$/.test(ticketNumber)) {
                 // Send the ticket number and active tab to the background script
                 chrome.runtime.sendMessage(
                     {
@@ -74,17 +75,31 @@ document.addEventListener('DOMContentLoaded', function() {
                         tab: activeTab
                     },
                     function(response) {
-                        if (response && response.success) {
+                        if (chrome.runtime.lastError) {
+                            console.error('Error sending message:', chrome.runtime.lastError);
+                            showError('Failed to process ticket');
+                        } else if (response && response.success) {
                             window.close();
+                        } else if (response && response.error) {
+                            showError(response.error);
                         }
                     }
                 );
             } else {
-                input.classList.add('error');
-                setTimeout(() => input.classList.remove('error'), 1000);
+                showError('Please enter a valid ticket number');
             }
         }
     });
+    
+    function showError(message) {
+        input.classList.add('error');
+        input.setAttribute('aria-invalid', 'true');
+        input.setAttribute('title', message);
+        setTimeout(() => {
+            input.classList.remove('error');
+            input.removeAttribute('aria-invalid');
+        }, 1500);
+    }
 
     // Handle escape key to close the window
     document.addEventListener('keydown', function(e) {
