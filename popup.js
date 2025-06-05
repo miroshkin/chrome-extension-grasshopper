@@ -5,10 +5,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const jira2Label = document.getElementById('jira2-label');
     const shortcutDisplay = document.getElementById('shortcut-display');
     const saveSettingsBtn = document.getElementById('save-settings');
-    const statusMessage = document.querySelector('.status-message');
+    const changeShortcutBtn = document.getElementById('change-shortcut-btn');
+    const statusMessage = document.getElementById('status-message');
+    const statusText = document.getElementById('status-text');
 
     // Check if all required elements exist
-    if (!jiraUrl1Input || !jiraUrl2Input || !jira1Label || !jira2Label || !shortcutDisplay || !saveSettingsBtn || !statusMessage) {
+    if (!jiraUrl1Input || !jiraUrl2Input || !jira1Label || !jira2Label || !shortcutDisplay || !saveSettingsBtn || !changeShortcutBtn || !statusMessage || !statusText) {
         console.error('One or more required DOM elements not found');
         return;
     }
@@ -62,17 +64,23 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Handle change shortcut button click
+    changeShortcutBtn.addEventListener('click', function() {
+        chrome.tabs.create({ url: 'chrome://extensions/shortcuts' });
+    });
+
 
 
     // Helper function to show status messages
     function showStatus(message, type) {
-        statusMessage.textContent = message;
-        statusMessage.className = `status-message ${type}`;
+        statusText.textContent = message;
+        statusMessage.className = `alert alert-dismissible fade show alert-${type === 'success' ? 'success' : 'danger'}`;
         statusMessage.style.display = 'block';
         
         // Hide after 3 seconds
         setTimeout(() => {
             statusMessage.style.display = 'none';
+            statusMessage.classList.remove('show');
         }, 3000);
     }
 });
