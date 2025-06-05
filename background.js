@@ -7,8 +7,8 @@ chrome.commands.onCommand.addListener(function(command) {
                 return;
             }
 
-            var width = 165;
-            var height = 120; // Increased height to accommodate tab selector
+            var width = 250;
+            var height = 110; // Increased height to accommodate tab selector
             var left = ((win.width / 2) - (width / 2)) + win.left;
             var top = ((win.height / 2) - (height / 2)) + win.top;
     

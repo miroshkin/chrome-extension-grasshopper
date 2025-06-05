@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Task Input</title>
+    <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css">
     <style>
         body {
             margin: 0;
@@ -27,27 +28,36 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             position: relative;
             z-index: 1000;
-            min-width: 120px;
+            min-width: 250px;
         }
 
-        .ticket-input {
-            width: 100%;
-            padding: 6px;
-            font-size: 14px;
-            text-align: center;
+        .tab-selector {
+            display: flex;
+            margin-bottom: 5px;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 4px;
             border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
             border-radius: 3px;
-            font-family: inherit;
-            box-sizing: border-box;
+            font-size: 0.8em;
         }
 
-        .ticket-input:focus {
-            outline: none;
+        .tab-button.active {
+            background: #2196F3;
+            color: white;
+            border-color: #2196F3;
+        }
+
+        .form-control:focus {
             border-color: #2196F3;
             box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
         }
 
-        .ticket-input::placeholder {
+        .form-control::placeholder {
             color: #999;
         }
 
@@ -55,35 +65,21 @@
             border-color: #FF5252 !important;
             box-shadow: 0 0 0 2px rgba(255, 82, 82, 0.2) !important;
         }
+
+        .text-center {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <div class="overlay-container">
         <div class="tab-selector">
-            <button id="jira-tab1" class="tab-button active" data-tab-label="1"></button>
-            <button id="jira-tab2" class="tab-button">2</button>
+            <button id="jira-tab1" class="tab-button active" data-tab-label="1">Tab 1</button>
+            <button id="jira-tab2" class="tab-button">Tab 2</button>
         </div>
-        <input type="text" id="ticket-input" class="ticket-input" placeholder="Ticket number" maxlength="8">
-        <style>
-            .tab-selector {
-                display: flex;
-                margin-bottom: 8px;
-            }
-            .tab-button {
-                flex: 1;
-                padding: 4px 8px;
-                border: 1px solid #ddd;
-                background: white;
-                cursor: pointer;
-                border-radius: 3px;
-            }
-            .tab-button.active {
-                background: #2196F3;
-                color: white;
-                border-color: #2196F3;
-            }
-        </style>
+        <input type="text" id="ticket-input" class="form-control text-center" placeholder="Enter ticket number" maxlength="8" style="height: 30px; font-size: 0.85em;">
     </div>
+    <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="overlay.js"></script>
 </body>
 </html>
