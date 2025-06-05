@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Grasshopper Extension Settings</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Grasshopper Extension Settings</h1>
+        
+        <div class="setting-group">
+            <h2>Tab 1</h2>
+            <div class="setting-item">
+                <label for="jira-url1">Jira Organization URL:</label>
+                <input type="url" id="jira-url1" placeholder="https://your-org.atlassian.net/browse/">
+            </div>
+            <div class="setting-item">
+                <label for="jira1-label">Label:</label>
+                <input type="text" id="jira1-label" placeholder="Enter label for Tab 1">
+            </div>
+        </div>
+
+        <div class="setting-group">
+            <h2>Tab 2</h2>
+            <div class="setting-item">
+                <label for="jira-url2">Jira Organization URL:</label>
+                <input type="url" id="jira-url2" placeholder="https://your-org.atlassian.net/browse/">
+            </div>
+            <div class="setting-item">
+                <label for="jira2-label">Label:</label>
+                <input type="text" id="jira2-label" placeholder="Enter label for Tab 2">
+            </div>
+        </div>
+
+        <div class="setting-group">
+            <label>Keyboard Shortcut:</label>
+            <div class="shortcut-display" id="shortcut-display">Alt+Shift+J</div>
+        </div>
+
+        <div class="status-message"></div>
+        <div id="shortcut-instructions">To change the settings, go to chrome://extensions/shortcuts</div>
+        
+        <button id="save-settings">Save Settings</button>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

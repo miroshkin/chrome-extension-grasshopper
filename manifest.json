@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Grasshopper Extension",
+  "version": "1.0",
+  "description": "A Chrome extension built with Grasshopper",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "commands",
+    "tabs"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "toggle-feature": {
+      "suggested_key": {
+        "default": "Alt+J"
+      },
+      "description": "Toggle Grasshopper feature"
+    }
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/grasshopper-16.png",
+      "48": "icons/grasshopper-48.png"
+    }
+  },
+  "icons": {
+    "16": "icons/grasshopper-16.png",
+    "48": "icons/grasshopper-48.png"
+  }
+}

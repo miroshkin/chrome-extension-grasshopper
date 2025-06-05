@@ -1,0 +1,109 @@
+body {
+    width: 400px;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+.container {
+    text-align: left;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #2196F3;
+    margin: 0 0 10px 0;
+    font-size: 1.1em;
+    line-height: 1.2;
+}
+
+.setting-group {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.setting-group h2 {
+    color: #2196F3;
+    margin: 0 0 15px 0;
+    font-size: 1.1em;
+}
+
+.setting-item {
+    margin-bottom: 8px;
+    display: block;
+}
+
+.setting-group label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+.setting-group input {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.shortcut-display {
+    background: #f5f5f5;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+button {
+    background: #2196F3;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+button:hover {
+    background: #1976D2;
+}
+
+.status-message {
+    margin: 10px 0;
+    padding: 8px;
+    border-radius: 4px;
+    display: none;
+}
+
+#shortcut-instructions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0;
+    padding: 8px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#shortcut-instructions:hover {
+    background: #e0e0e0;
+    color: #2196F3;
+}
+
+.status-message.success {
+    background: #E8F5E9;
+    color: #2E7D32;
+}
+
+.status-message.error {
+    background: #FFEBEE;
+    color: #C62828;
+}

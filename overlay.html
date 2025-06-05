@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Task Input</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .overlay-container {
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 1000;
+            min-width: 120px;
+        }
+
+        .ticket-input {
+            width: 100%;
+            padding: 6px;
+            font-size: 14px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+
+        .ticket-input:focus {
+            outline: none;
+            border-color: #2196F3;
+            box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+        }
+
+        .ticket-input::placeholder {
+            color: #999;
+        }
+
+        .error {
+            border-color: #FF5252 !important;
+            box-shadow: 0 0 0 2px rgba(255, 82, 82, 0.2) !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay-container">
+        <div class="tab-selector">
+            <button id="jira-tab1" class="tab-button active" data-tab-label="1"></button>
+            <button id="jira-tab2" class="tab-button">2</button>
+        </div>
+        <input type="text" id="ticket-input" class="ticket-input" placeholder="Ticket number" maxlength="8">
+        <style>
+            .tab-selector {
+                display: flex;
+                margin-bottom: 8px;
+            }
+            .tab-button {
+                flex: 1;
+                padding: 4px 8px;
+                border: 1px solid #ddd;
+                background: white;
+                cursor: pointer;
+                border-radius: 3px;
+            }
+            .tab-button.active {
+                background: #2196F3;
+                color: white;
+                border-color: #2196F3;
+            }
+        </style>
+    </div>
+    <script src="overlay.js"></script>
+</body>
+</html>
