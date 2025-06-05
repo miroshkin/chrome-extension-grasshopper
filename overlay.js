@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
             jiraTab1.textContent = label1;
             jiraTab2.textContent = label2;
             // Update data attributes for accessibility
-            jiraTab1.setAttribute('aria-label', `Tab ${label1}`);
-            jiraTab2.setAttribute('aria-label', `Tab ${label2}`);
+            jiraTab1.setAttribute('aria-label', `Project ${label1}`);
+            jiraTab2.setAttribute('aria-label', `Project ${label2}`);
         });
     }
 
