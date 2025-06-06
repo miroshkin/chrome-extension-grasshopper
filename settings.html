@@ -71,12 +71,7 @@
             background-color: #2196F3; /* Updated button color */
         }
 
-        #save-settings:hover {
-            background-color: #1976D2; /* Slightly darker shade for hover */
-            color: #fff; /* Ensure text color remains unchanged */
-        }
-
-        #change-shortcut-btn:hover {
+        #save-settings:hover, #change-shortcut-btn:hover {
             background-color: #1976D2; /* Slightly darker shade for hover */
             color: #fff; /* Ensure text color remains unchanged */
         }
@@ -109,17 +104,17 @@
 <body>
     <div class="settings-container">
         <h1>Grasshopper Settings</h1>
-        <label for="url1">Tab 1 URL</label>
+        <label for="url1-label">Label One</label>
+        <input type="text" id="url1-label" placeholder="Enter label for Tab 1">
+        
+        <label for="url1">URL One</label>
         <input type="text" id="url1" placeholder="Enter URL for Tab 1">
 
-        <label for="url1-label">Tab 1 Label</label>
-        <input type="text" id="url1-label" placeholder="Enter label for Tab 1">
-
-        <label for="url2">Tab 2 URL</label>
-        <input type="text" id="url2" placeholder="Enter URL for Tab 2">
-
-        <label for="url2-label">Tab 2 Label</label>
+        <label for="url2-label">Label Two</label>
         <input type="text" id="url2-label" placeholder="Enter label for Tab 2">
+
+        <label for="url2">URL Two</label>
+        <input type="text" id="url2" placeholder="Enter URL for Tab 2">
 
         <button id="save-settings" class="btn">Save Settings</button>
         <div id="status-message" class="status-message" style="display: none;"></div>
