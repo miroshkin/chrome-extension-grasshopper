@@ -2,6 +2,15 @@
 
 A modern Chrome extension for quick Jira ticket navigation with an intuitive grasshopper-themed UI powered by Bootstrap 5.3.6.
 
+🚀 Grasshopper is your new favorite Chrome extension that helps you jump to any source instantly! Just set up your custom link templates once, and you're ready to go. Whether it’s a database, internal tool, or search page — just type a keyword or ID, and Grasshopper builds the perfect link for you in a flash. ⚡
+
+🎯 Start it anytime with a keyboard shortcut you choose. Switch between two tabs/projects with ease — perfect for multitaskers and productivity pros. Say goodbye to clicking through endless menus and hello to getting things DONE. ✅
+
+💼 Whether you're a developer, analyst, or digital wizard, Grasshopper will save you time and clicks every single day. It's simple, smart, and super fast. 💡
+
+🔥 Try Grasshopper today and leap into a faster workflow!
+Boost your productivity. Stay focused. Get more done. 🐛➡️🦗
+
 ## ✨ Features
 
 ### 🎯 Core Functionality
@@ -27,13 +36,6 @@ A modern Chrome extension for quick Jira ticket navigation with an intuitive gra
 - **Persistent Settings**: Your preferences are saved and synced across devices
 - **Error Handling**: Comprehensive validation with helpful error messages
 - **Chrome Extension Best Practices**: Manifest v3 compliant with secure CSP
-
-## 🚀 Installation
-
-1. Open Chrome and navigate to `chrome://extensions/`
-2. Enable "Developer mode" in the top right corner
-3. Click "Load unpacked" and select this directory
-4. The Grasshopper extension will appear in your toolbar
 
 ## 🎮 Usage
 
@@ -128,4 +130,4 @@ If you encounter any issues, please report them on the GitHub issues page with:
 
 ---
 
-**Made with 💚 and Bootstrap 5.3.6** 🦗  
+**Made with 💚 and Bootstrap 5.3.6** 🦗

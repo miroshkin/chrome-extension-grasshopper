@@ -1,19 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {
     const input = document.getElementById('ticket-input');
-    const jiraTab1 = document.getElementById('jira-tab1');
-    const jiraTab2 = document.getElementById('jira-tab2');
+    const tab1 = document.getElementById('tab1');
+    const tab2 = document.getElementById('tab2');
     let activeTab = 1;
 
     // Load tab labels from storage
     function loadTabLabels() {
-        chrome.storage.sync.get(['jira1Label', 'jira2Label'], function(result) {
-            const label1 = result.jira1Label || '1';
-            const label2 = result.jira2Label || '2';
-            jiraTab1.textContent = label1;
-            jiraTab2.textContent = label2;
+        chrome.storage.sync.get(['label1', 'label2'], function(result) {
+            const label1 = result.label1 || '1';
+            const label2 = result.label2 || '2';
+            tab1.textContent = label1;
+            tab2.textContent = label2;
             // Update data attributes for accessibility
-            jiraTab1.setAttribute('aria-label', `Project ${label1}`);
-            jiraTab2.setAttribute('aria-label', `Project ${label2}`);
+            tab1.setAttribute('aria-label', `Project ${label1}`);
+            tab2.setAttribute('aria-label', `Project ${label2}`);
         });
     }
 
@@ -33,22 +33,22 @@ document.addEventListener('DOMContentLoaded', function() {
     loadTabLabels();
 
     // Handle tab switching
-    jiraTab1.addEventListener('click', () => {
+    tab1.addEventListener('click', () => {
         activeTab = 1;
         updateTabSelection(activeTab);
     });
 
-    jiraTab2.addEventListener('click', () => {
+    tab2.addEventListener('click', () => {
         activeTab = 2;
         updateTabSelection(activeTab);
     });
 
     // Handle mouse click on project tabs
-    jiraTab1.addEventListener('click', function() {
+    tab1.addEventListener('click', function() {
         activeTab = 1;
         input.focus();
     });
-    jiraTab2.addEventListener('click', function() {
+    tab2.addEventListener('click', function() {
         activeTab = 2;
         input.focus();
     });
@@ -65,8 +65,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Update tab selection and store it
     function updateTabSelection(tabNumber) {
-        jiraTab1.classList.toggle('active', tabNumber === 1);
-        jiraTab2.classList.toggle('active', tabNumber === 2);
+        tab1.classList.toggle('active', tabNumber === 1);
+        tab2.classList.toggle('active', tabNumber === 2);
         chrome.storage.sync.set({ lastActiveTab: tabNumber });
     }
 

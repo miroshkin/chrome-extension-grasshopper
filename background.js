@@ -32,20 +32,20 @@ chrome.commands.onCommand.addListener(function(command) {
     }
 });
 
-// Load Jira URLs when extension starts
+// Load URLs when extension starts
 chrome.runtime.onInstalled.addListener(() => {
-    chrome.storage.sync.get(['jiraUrl1', 'jiraUrl2'], function(result) {
+    chrome.storage.sync.get(['url1', 'url2'], function(result) {
         if (chrome.runtime.lastError) {
             console.error('Error loading settings:', chrome.runtime.lastError);
             return;
         }
         
         const updates = {};
-        if (!result.jiraUrl1) {
-            updates.jiraUrl1 = 'https://chromeextension.atlassian.net/browse/';
+        if (!result.url1) {
+            updates.url1 = 'https://chromeextension.atlassian.net/browse/';
         }
-        if (!result.jiraUrl2) {
-            updates.jiraUrl2 = 'https://chromeextension.atlassian.net/browse/';
+        if (!result.url2) {
+            updates.url2 = 'https://chromeextension.atlassian.net/browse/';
         }
         
         // Only update if needed
@@ -64,21 +64,21 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.action === 'openTicket') {
         console.log('Received ticket number:', request.ticketNumber);
         
-        // Get both Jira URLs from storage
-        chrome.storage.sync.get(['jiraUrl1', 'jiraUrl2'], function(result) {
-            console.log('Jira URLs from storage:', result);
+        // Get both URLs from storage
+        chrome.storage.sync.get(['url1', 'url2'], function(result) {
+            console.log('URLs from storage:', result);
             
-            let jiraUrl;
+            let url;
             if (request.tab === 1) {
-                jiraUrl = result.jiraUrl1;
+                url = result.url1;
             } else if (request.tab === 2) {
-                jiraUrl = result.jiraUrl2;
+                url = result.url2;
             }
 
-            if (jiraUrl) {
+            if (url) {
                 try {
                     // Create the full ticket URL
-                    const ticketUrl = `${jiraUrl}${request.ticketNumber}`;
+                    const ticketUrl = `${url}${request.ticketNumber}`;
                     
                     // Create a new tab with the ticket URL
                     chrome.tabs.create({url: ticketUrl}, function(tab) {
@@ -95,8 +95,8 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                     sendResponse({success: false, error: error.message});
                 }
             } else {
-                console.error('No Jira URL set in settings');
-                sendResponse({success: false, error: 'No Jira URL set in settings'});
+                console.error('No URL set in settings');
+                sendResponse({success: false, error: 'No URL set in settings'});
             }
         });
         return true;  // Keep the message channel open until sendResponse is called
