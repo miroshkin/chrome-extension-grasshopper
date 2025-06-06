@@ -4,7 +4,7 @@ A modern Chrome extension for quick Jira ticket navigation with an intuitive gra
 
 🚀 Grasshopper is your new favorite Chrome extension that helps you jump to any source instantly! Just set up your custom link templates once, and you're ready to go. Whether it’s a database, internal tool, or search page — just type a keyword or ID, and Grasshopper builds the perfect link for you in a flash. ⚡
 
-🎯 Use it with your favorite tools like Trello, Asana, ClickUp, Notion, Todoist, Jira, Monday.com, Wrike, Smartsheet, Airtable, GitHub Projects, Linear, YouTrack, and many more!
+🎯 Use it with your favorite tools like [Trello](https://trello.com), [Asana](https://asana.com), [ClickUp](https://clickup.com), [Notion](https://www.notion.so), [Todoist](https://todoist.com), [Jira](https://www.atlassian.com/software/jira), [Monday.com](https://monday.com), [Wrike](https://www.wrike.com), [Smartsheet](https://www.smartsheet.com), [Airtable](https://www.airtable.com), [GitHub Projects](https://github.com/features/project-management), [Linear](https://linear.app), [YouTrack](https://www.jetbrains.com/youtrack), and many more!
 
 💡 Plus, Grasshopper works with any searching system or corporate system that uses IDs or text — so you can instantly jump to exactly what you need, wherever it lives.
 
