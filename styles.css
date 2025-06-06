@@ -4,6 +4,7 @@
 body {
     width: 350px;
     min-height: 300px;
+    overflow-y: hidden; /* Disable vertical scrolling */
 }
 
 /* Custom card styling */
@@ -39,7 +40,7 @@ body {
 }
 
 .btn:hover {
-    transform: translateY(-1px);
+    transform: none !important; /* Remove hover movement */
 }
 
 .btn-lg {
@@ -119,4 +120,22 @@ body.bg-light {
 /* Remove hover movement for Save Settings button */
 #save-settings:hover {
     transform: none !important;
+}
+
+#save-settings {
+    width: 100%; /* Set width to 100% */
+}
+
+#save-settings.success, #save-settings.error {
+    width: 100%; /* Ensure consistent width for Success and Error states */
+}
+
+#change-shortcut-btn {
+    width: 100%; /* Set width to 100% */
+    margin-top: 10px; /* Add spacing */
+}
+
+.settings-container {
+    margin: 0; /* Remove margin */
+    height: 100%; /* Set height to 100% */
 }

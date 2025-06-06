@@ -7,10 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const shortcutDisplay = document.getElementById('shortcut-display');
     const saveSettingsBtn = document.getElementById('save-settings');
     const changeShortcutBtn = document.getElementById('change-shortcut-btn');
-    const statusMessage = document.getElementById('status-message');
-    const statusText = document.getElementById('status-text');
 
-    if (!url1Input || !url2Input || !url1Label || !url2Label || !shortcutDisplay || !saveSettingsBtn || !changeShortcutBtn || !statusMessage || !statusText) {
+    if (!url1Input || !url2Input || !url1Label || !url2Label || !shortcutDisplay || !saveSettingsBtn || !changeShortcutBtn) {
         console.error('One or more required DOM elements are missing or inaccessible');
         return;
     }
@@ -55,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const url2LabelValue = url2Label.value.trim() || '2';
 
         if (!url1 && !url2) {
-            showStatus('Please enter at least one URL', 'error');
+            updateButtonState('error', 'Error');
             return;
         }
 
@@ -66,10 +64,9 @@ document.addEventListener('DOMContentLoaded', function() {
             url2Label: url2LabelValue
         }, function() {
             if (chrome.runtime.lastError) {
-                console.error('Error saving settings:', chrome.runtime.lastError);
-                showStatus('Error saving settings', 'error');
+                updateButtonState('error', 'Error');
             } else {
-                showStatus('Settings saved successfully', 'success');
+                updateButtonState('success', 'Success');
             }
         });
     });
@@ -79,15 +76,17 @@ document.addEventListener('DOMContentLoaded', function() {
         chrome.tabs.create({ url: 'chrome://extensions/shortcuts' });
     });
 
-    // Helper function to show status messages
-    function showStatus(message, type) {
-        statusText.textContent = message;
-        statusMessage.className = `alert alert-dismissible fade show alert-${type === 'success' ? 'success' : 'danger'}`;
-        statusMessage.style.display = 'block';
+    function updateButtonState(state, text) {
+        saveSettingsBtn.textContent = text;
+        saveSettingsBtn.style.backgroundColor = state === 'success' ? '#e6f7e6' : '#fbe6e6';
+        saveSettingsBtn.style.color = state === 'success' ? '#2d7a2d' : '#a12d2d';
+        saveSettingsBtn.style.padding = '10px 20px'; // Ensure consistent button size
+        saveSettingsBtn.style.fontSize = '1em';
 
         setTimeout(() => {
-            statusMessage.style.display = 'none';
-            statusMessage.classList.remove('show');
+            saveSettingsBtn.textContent = 'Save Settings';
+            saveSettingsBtn.style.backgroundColor = '#2196F3';
+            saveSettingsBtn.style.color = '#fff';
         }, 3000);
     }
 });
