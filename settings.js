@@ -67,6 +67,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 updateButtonState('error', 'Error');
             } else {
                 updateButtonState('success', 'Success');
+                // Notify overlays to update tab labels
+                chrome.runtime.sendMessage({ action: 'updateTabLabels' });
             }
         });
     });

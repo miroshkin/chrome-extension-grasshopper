@@ -113,6 +113,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Listen for messages to update tab labels
+    chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+        if (request.action === 'updateTabLabels') {
+            loadTabLabels();
+        }
+    });
+
     // Call loadTabLabels to ensure saved settings are displayed
     loadTabLabels();
 });
