@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Grasshopper",
   "version": "0.1",
-  "version_name": "1.0.0",
+  "version_name": "0.1.0",
   "author": "Anton Miroshkin",
   "description": "Grasshopper is a Chrome extension that streamlines your workflow by allowing you to quickly build custom links and instantly navigate to the exact source you need",
   "minimum_chrome_version": "88",
