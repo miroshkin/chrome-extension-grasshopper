@@ -24,7 +24,7 @@
         .overlay-container {
             background: white;
             padding: 10px;
-            border-radius: 4px;
+            border-radius: 0;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             position: relative;
             z-index: 1000;
@@ -72,7 +72,7 @@
     </style>
 </head>
 <body>
-    <div class="overlay-container">
+    <div class="overlay-container" style="padding: 10px; min-width: 250px; background-color: #D9EAFD; border-radius: 0;">
         <div class="tab-selector">
             <button id="jira-tab1" class="tab-button active" data-tab-label="1">Tab 1</button>
             <button id="jira-tab2" class="tab-button">Tab 2</button>

@@ -2,8 +2,8 @@
 
 /* Popup specific styles */
 body {
-    width: 420px;
-    min-height: 500px;
+    width: 350px;
+    min-height: 300px;
 }
 
 /* Custom card styling */
@@ -106,7 +106,12 @@ h1 {
 
 /* Container enhancements */
 .container-fluid {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     border-radius: 8px;
     border: 1px solid #dee2e6;
+}
+
+body.bg-light {
+    background: #f6fafd !important; /* Removed gradient */
+    font-family: 'Poppins', Arial, sans-serif;
+    color: #22304a;
 }
