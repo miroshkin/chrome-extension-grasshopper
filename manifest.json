@@ -24,7 +24,7 @@
     }
   },
   "action": {
-    "default_popup": "popup.html",
+    "default_popup": "settings.html",
     "default_icon": {
       "16": "icons/grasshopper-16.png",
       "48": "icons/grasshopper-48.png"
