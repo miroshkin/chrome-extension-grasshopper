@@ -6,9 +6,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Load tab labels from storage
     function loadTabLabels() {
-        chrome.storage.sync.get(['label1', 'label2'], function(result) {
-            const label1 = result.label1 || '1';
-            const label2 = result.label2 || '2';
+        // Ensure saved values are loaded correctly
+        chrome.storage.sync.get(['url1Label', 'url2Label'], function(result) {
+            const label1 = result.url1Label || '1';
+            const label2 = result.url2Label || '2';
             tab1.textContent = label1;
             tab2.textContent = label2;
             // Update data attributes for accessibility
@@ -111,4 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
             window.close();
         }
     });
+
+    // Call loadTabLabels to ensure saved settings are displayed
+    loadTabLabels();
 });

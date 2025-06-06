@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const jiraUrl1Input = document.getElementById('jira-url1');
-    const jiraUrl2Input = document.getElementById('jira-url2');
-    const jira1Label = document.getElementById('jira1-label');
-    const jira2Label = document.getElementById('jira2-label');
+    const url1Input = document.getElementById('url1');
+    const url2Input = document.getElementById('url2');
+    const url1Label = document.getElementById('url1-label');
+    const url2Label = document.getElementById('url2-label');
     const shortcutDisplay = document.getElementById('shortcut-display');
     const saveSettingsBtn = document.getElementById('save-settings');
     const changeShortcutBtn = document.getElementById('change-shortcut-btn');
@@ -10,24 +10,36 @@ document.addEventListener('DOMContentLoaded', function() {
     const statusText = document.getElementById('status-text');
 
     // Check if all required elements exist
-    if (!jiraUrl1Input || !jiraUrl2Input || !jira1Label || !jira2Label || !shortcutDisplay || !saveSettingsBtn || !changeShortcutBtn || !statusMessage || !statusText) {
-        console.error('One or more required DOM elements not found');
+    if (!url1Input || !url2Input || !url1Label || !url2Label || !shortcutDisplay || !saveSettingsBtn || !changeShortcutBtn || !statusMessage || !statusText) {
+        console.error('One or more required DOM elements are missing or inaccessible');
+        // Debugging logs to identify missing elements
+        console.log({
+            url1Input,
+            url2Input,
+            url1Label,
+            url2Label,
+            shortcutDisplay,
+            saveSettingsBtn,
+            changeShortcutBtn,
+            statusMessage,
+            statusText
+        });
         return;
     }
 
     // Load saved settings
-    chrome.storage.sync.get(['jiraUrl1', 'jiraUrl2', 'jira1Label', 'jira2Label'], function(result) {
-        if (result.jiraUrl1) {
-            jiraUrl1Input.value = result.jiraUrl1;
+    chrome.storage.sync.get(['url1', 'url2', 'url1Label', 'url2Label'], function(result) {
+        if (result.url1) {
+            url1Input.value = result.url1;
         }
-        if (result.jiraUrl2) {
-            jiraUrl2Input.value = result.jiraUrl2;
+        if (result.url2) {
+            url2Input.value = result.url2;
         }
-        if (result.jira1Label) {
-            jira1Label.value = result.jira1Label;
+        if (result.url1Label) {
+            url1Label.value = result.url1Label;
         }
-        if (result.jira2Label) {
-            jira2Label.value = result.jira2Label;
+        if (result.url2Label) {
+            url2Label.value = result.url2Label;
         }
     });
 
@@ -44,21 +56,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle save settings
     saveSettingsBtn.addEventListener('click', function() {
-        const jiraUrl1 = jiraUrl1Input.value.trim();
-        const jiraUrl2 = jiraUrl2Input.value.trim();
-        const jira1LabelValue = jira1Label.value.trim() || '1';
-        const jira2LabelValue = jira2Label.value.trim() || '2';
+        const url1 = url1Input.value.trim();
+        const url2 = url2Input.value.trim();
+        const url1LabelValue = url1Label.value.trim() || '1';
+        const url2LabelValue = url2Label.value.trim() || '2';
         
-        if (!jiraUrl1 && !jiraUrl2) {
+        if (!url1 && !url2) {
             showStatus('Please enter at least one URL', 'error');
             return;
         }
 
         chrome.storage.sync.set({ 
-            jiraUrl1: jiraUrl1, 
-            jiraUrl2: jiraUrl2,
-            jira1Label: jira1LabelValue,
-            jira2Label: jira2LabelValue
+            url1: url1, 
+            url2: url2,
+            url1Label: url1LabelValue,
+            url2Label: url2LabelValue
         }, function() {
             showStatus('Settings saved successfully', 'success');
         });
