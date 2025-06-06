@@ -5,6 +5,7 @@ body {
     width: 350px;
     min-height: 300px;
     overflow-y: hidden; /* Disable vertical scrolling */
+    font-size: 0.9rem; /* Reduced font size for settings */
 }
 
 /* Custom card styling */
