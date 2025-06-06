@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Optimize DOM manipulation by caching elements
     const url1Input = document.getElementById('url1');
     const url2Input = document.getElementById('url2');
     const url1Label = document.getElementById('url1-label');
@@ -9,26 +10,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const statusMessage = document.getElementById('status-message');
     const statusText = document.getElementById('status-text');
 
-    // Check if all required elements exist
     if (!url1Input || !url2Input || !url1Label || !url2Label || !shortcutDisplay || !saveSettingsBtn || !changeShortcutBtn || !statusMessage || !statusText) {
         console.error('One or more required DOM elements are missing or inaccessible');
-        // Debugging logs to identify missing elements
-        console.log({
-            url1Input,
-            url2Input,
-            url1Label,
-            url2Label,
-            shortcutDisplay,
-            saveSettingsBtn,
-            changeShortcutBtn,
-            statusMessage,
-            statusText
-        });
         return;
     }
 
-    // Load saved settings
+    // Load saved settings with error handling
     chrome.storage.sync.get(['url1', 'url2', 'url1Label', 'url2Label'], function(result) {
+        if (chrome.runtime.lastError) {
+            console.error('Error loading settings:', chrome.runtime.lastError);
+            return;
+        }
+
         if (result.url1) {
             url1Input.value = result.url1;
         }
@@ -60,19 +53,24 @@ document.addEventListener('DOMContentLoaded', function() {
         const url2 = url2Input.value.trim();
         const url1LabelValue = url1Label.value.trim() || '1';
         const url2LabelValue = url2Label.value.trim() || '2';
-        
+
         if (!url1 && !url2) {
             showStatus('Please enter at least one URL', 'error');
             return;
         }
 
-        chrome.storage.sync.set({ 
-            url1: url1, 
+        chrome.storage.sync.set({
+            url1: url1,
             url2: url2,
             url1Label: url1LabelValue,
             url2Label: url2LabelValue
         }, function() {
-            showStatus('Settings saved successfully', 'success');
+            if (chrome.runtime.lastError) {
+                console.error('Error saving settings:', chrome.runtime.lastError);
+                showStatus('Error saving settings', 'error');
+            } else {
+                showStatus('Settings saved successfully', 'success');
+            }
         });
     });
 
@@ -81,15 +79,12 @@ document.addEventListener('DOMContentLoaded', function() {
         chrome.tabs.create({ url: 'chrome://extensions/shortcuts' });
     });
 
-
-
     // Helper function to show status messages
     function showStatus(message, type) {
         statusText.textContent = message;
         statusMessage.className = `alert alert-dismissible fade show alert-${type === 'success' ? 'success' : 'danger'}`;
         statusMessage.style.display = 'block';
-        
-        // Hide after 3 seconds
+
         setTimeout(() => {
             statusMessage.style.display = 'none';
             statusMessage.classList.remove('show');
