@@ -115,3 +115,8 @@ body.bg-light {
     font-family: 'Poppins', Arial, sans-serif;
     color: #22304a;
 }
+
+/* Remove hover movement for Save Settings button */
+#save-settings:hover {
+    transform: none !important;
+}
