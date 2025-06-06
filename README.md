@@ -14,8 +14,6 @@ A modern Chrome extension for quick Jira ticket navigation with an intuitive gra
 
 ⚡ Try Grasshopper today and leap into a faster workflow! Boost your productivity. Stay focused. Get more done. 🐛➡️🦗
 
-## ✨ Features
-
 ## 🎮 Usage
 
 ### Initial Setup
