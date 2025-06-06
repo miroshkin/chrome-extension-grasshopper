@@ -43,6 +43,16 @@ document.addEventListener('DOMContentLoaded', function() {
         updateTabSelection(activeTab);
     });
 
+    // Handle mouse click on project tabs
+    jiraTab1.addEventListener('click', function() {
+        activeTab = 1;
+        input.focus();
+    });
+    jiraTab2.addEventListener('click', function() {
+        activeTab = 2;
+        input.focus();
+    });
+
     // Handle Tab key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Tab') {

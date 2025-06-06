@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const jira2LabelValue = jira2Label.value.trim() || '2';
         
         if (!jiraUrl1 && !jiraUrl2) {
-            showStatus('Please enter at least one Jira URL', 'error');
+            showStatus('Please enter at least one URL', 'error');
             return;
         }
 
