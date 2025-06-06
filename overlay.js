@@ -65,41 +65,35 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.key === 'Enter') {
             e.preventDefault();
             const ticketNumber = input.value.trim();
-            // Improved validation with more secure regex and strict validation
-            if (ticketNumber.length > 0 && ticketNumber.length <= 8 && /^\d+$/.test(ticketNumber)) {
-                // Send the ticket number and active tab to the background script
-                chrome.runtime.sendMessage(
-                    {
-                        action: 'openTicket',
-                        ticketNumber: ticketNumber,
-                        tab: activeTab
-                    },
-                    function(response) {
-                        if (chrome.runtime.lastError) {
-                            console.error('Error sending message:', chrome.runtime.lastError);
-                            showError('Failed to process ticket');
-                        } else if (response && response.success) {
+            // Send the ticket number and active tab to the background script
+            chrome.runtime.sendMessage(
+                {
+                    action: 'openTicket',
+                    ticketNumber: ticketNumber,
+                    tab: activeTab
+                },
+                function(response) {
+                    if (chrome.runtime.lastError) {
+                        console.error('Error sending message:', chrome.runtime.lastError);
+                    } else if (response && response.success) {
+                        // Ensure window.close is only called when the overlay is open
+                        if (window.opener) {
                             window.close();
-                        } else if (response && response.error) {
-                            showError(response.error);
                         }
+                    } else if (response && response.error) {
+                        console.error('Error:', response.error);
                     }
-                );
-            } else {
-                showError('Please enter a valid ticket number');
-            }
+                }
+            );
+            // Clear ticket number after pressing Enter
+            input.style.transition = 'opacity 0.3s ease';
+            input.style.opacity = '0';
+            setTimeout(() => {
+                input.value = '';
+                input.style.opacity = '1';
+            }, 300);
         }
     });
-    
-    function showError(message) {
-        input.classList.add('error');
-        input.setAttribute('aria-invalid', 'true');
-        input.setAttribute('title', message);
-        setTimeout(() => {
-            input.classList.remove('error');
-            input.removeAttribute('aria-invalid');
-        }, 1500);
-    }
 
     // Handle escape key to close the window
     document.addEventListener('keydown', function(e) {

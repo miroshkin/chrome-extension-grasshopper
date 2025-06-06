@@ -12,13 +12,21 @@ chrome.commands.onCommand.addListener(function(command) {
             var left = ((win.width / 2) - (width / 2)) + win.left;
             var top = ((win.height / 2) - (height / 2)) + win.top;
     
-            chrome.windows.create({
-                url: chrome.runtime.getURL('overlay.html'),
-                width: width,
-                height: height,
-                top: Math.round(top),
-                left: Math.round(left),
-                type: 'popup'
+            // Ensure only one overlay instance is created
+            chrome.windows.getAll({populate: true}, function(windows) {
+                const overlayWindow = windows.find(win => win.tabs.some(tab => tab.url === chrome.runtime.getURL('overlay.html')));
+                if (overlayWindow) {
+                    chrome.windows.update(overlayWindow.id, {focused: true});
+                } else {
+                    chrome.windows.create({
+                        url: chrome.runtime.getURL('overlay.html'),
+                        width: width,
+                        height: height,
+                        top: Math.round(top),
+                        left: Math.round(left),
+                        type: 'popup'
+                    });
+                }
             });
          });
     }
