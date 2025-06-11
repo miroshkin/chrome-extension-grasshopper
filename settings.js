@@ -52,8 +52,29 @@ document.addEventListener('DOMContentLoaded', function() {
         const url1LabelValue = url1Label.value.trim() || '1';
         const url2LabelValue = url2Label.value.trim() || '2';
 
+        // URL validation
+        function isValidUrl(url) {
+            if (!url) return true; // Allow empty (optional)
+            try {
+                new URL(url);
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
+
+        // Require at least one URL
         if (!url1 && !url2) {
-            updateButtonState('error', 'Error');
+            updateButtonState('error', 'At least one URL is needed');
+            return;
+        }
+
+        if (url1 && !isValidUrl(url1)) {
+            updateButtonState('error', 'Invalid URL 1 - Check if the URL starts with http:// or https://');
+            return;
+        }
+        if (url2 && !isValidUrl(url2)) {
+            updateButtonState('error', 'Invalid URL 2 - Check if the URL starts with http:// or https://');
             return;
         }
 
