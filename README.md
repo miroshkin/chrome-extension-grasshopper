@@ -17,6 +17,7 @@ A modern Chrome extension for quick Jira ticket navigation with an intuitive gra
 ## 🎮 Usage
 
 ### Initial Setup
+
 1. Click the Grasshopper icon in your Chrome toolbar
 2. Configure your Project URLs:
    - **Project 1**: Enter your primary URL (e.g. Jira, `https://company.atlassian.net/browse/PRJ-`)
@@ -25,12 +26,14 @@ A modern Chrome extension for quick Jira ticket navigation with an intuitive gra
 4. Save your settings
 
 ### Quick Navigation
+
 1. Use the keyboard shortcut (default: `Alt+J`) or click the extension icon
 2. Type your number/text
 4. Press `Enter` to open the ticket in a new tab
 5. Use `Tab` to switch between projects, or `Esc` to close
 
 ### Customizing Shortcuts
+
 1. In the extension popup, click the "Change" button next to the keyboard shortcut
 2. Chrome will open the shortcuts configuration page
 3. Set your preferred key combination
@@ -38,23 +41,5 @@ A modern Chrome extension for quick Jira ticket navigation with an intuitive gra
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 🐛 Bug Reports
-
-If you encounter any issues, please report them on the GitHub issues page with:
-- Chrome version
-- Extension version
-- Steps to reproduce
-- Expected vs actual behavior
-
----
 
 **Made by Anton Miroshkin with 💚 and Bootstrap 5.3.6** 🦗
