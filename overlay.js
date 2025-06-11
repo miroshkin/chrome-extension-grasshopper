@@ -4,6 +4,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const tab2 = document.getElementById('tab2');
     let activeTab = 1;
 
+    // Check for required controls
+    if (!input || !tab1 || !tab2) {
+        document.body.innerHTML = '<div style="padding:24px;text-align:center;font-size:1.1em;color:#888;">This overlay must be opened from the extension icon.</div>';
+        return;
+    }
+
     // Load tab labels from storage
     function loadTabLabels() {
         // Ensure saved values are loaded correctly
