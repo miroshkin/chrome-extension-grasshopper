@@ -33,24 +33,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load tab labels
     loadTabLabels();
 
-    // Handle tab switching
-    tab1.addEventListener('click', () => {
-        activeTab = 1;
-        updateTabSelection(activeTab);
-    });
-
-    tab2.addEventListener('click', () => {
-        activeTab = 2;
-        updateTabSelection(activeTab);
-    });
-
-    // Handle mouse click on project tabs
+    // Update tab switching logic
     tab1.addEventListener('click', function() {
         activeTab = 1;
+        updateTabSelection(activeTab);
         input.focus();
     });
     tab2.addEventListener('click', function() {
         activeTab = 2;
+        updateTabSelection(activeTab);
         input.focus();
     });
 
@@ -71,38 +62,70 @@ document.addEventListener('DOMContentLoaded', function() {
         chrome.storage.sync.set({ lastActiveTab: tabNumber });
     }
 
+    // Load URLs for validation
+    chrome.storage.sync.get(['url1', 'url2'], function(result) {
+        window.url1 = result.url1 || '';
+        window.url2 = result.url2 || '';
+    });
+
     // Handle Enter key
     input.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {
             e.preventDefault();
             const ticketNumber = input.value.trim();
-            // Send the ticket number and active tab to the background script
-            chrome.runtime.sendMessage(
-                {
-                    action: 'openTicket',
-                    ticketNumber: ticketNumber,
-                    tab: activeTab
-                },
-                function(response) {
-                    if (chrome.runtime.lastError) {
-                        console.error('Error sending message:', chrome.runtime.lastError);
-                    } else if (response && response.success) {
-                        // Ensure window.close is only called when the overlay is open
-                        if (window.opener) {
-                            window.close();
-                        }
-                    } else if (response && response.error) {
-                        console.error('Error:', response.error);
-                    }
+            // Always get the latest URLs before checking
+            chrome.storage.sync.get(['url1', 'url2'], function(result) {
+                const url1 = result.url1 || '';
+                const url2 = result.url2 || '';
+                const currentUrl = activeTab === 1 ? url1 : url2;
+                if (!currentUrl || currentUrl.trim() === '') {
+                    input.value = '';
+                    input.placeholder = 'URL not found for this tab!';
+                    input.classList.add('error');
+                    setTimeout(() => {
+                        input.placeholder = 'Number/Text to add to the URL';
+                        input.classList.remove('error');
+                    }, 2000);
+                    return;
                 }
-            );
-            // Clear ticket number after pressing Enter
-            input.style.transition = 'opacity 0.3s ease';
-            input.style.opacity = '0';
-            setTimeout(() => {
-                input.value = '';
-                input.style.opacity = '1';
-            }, 300);
+                // Send the ticket number and active tab to the background script
+                chrome.runtime.sendMessage(
+                    {
+                        action: 'openTicket',
+                        ticketNumber: ticketNumber,
+                        tab: activeTab
+                    },
+                    function(response) {
+                        if (chrome.runtime.lastError) {
+                            console.error('Error sending message:', chrome.runtime.lastError);
+                        } else if (response && response.success) {
+                            // Ensure window.close is only called when the overlay is open
+                            if (window.opener) {
+                                window.close();
+                            }
+                        } else if (response && response.error) {
+                            input.value = '';
+                            input.placeholder = response.error === 'URL not found' ? 'URL not found for this tab!' : response.error;
+                            input.classList.add('error');
+                            setTimeout(() => {
+                                input.placeholder = 'Number/Text to add to the URL';
+                                input.classList.remove('error');
+                            }, 2000);
+                            // Do not log 'URL not found' error to console
+                            if (response.error !== 'URL not found') {
+                                console.error('Error:', response.error);
+                            }
+                        }
+                    }
+                );
+                // Clear ticket number after pressing Enter
+                input.style.transition = 'opacity 0.3s ease';
+                input.style.opacity = '0';
+                setTimeout(() => {
+                    input.value = '';
+                    input.style.opacity = '1';
+                }, 300);
+            });
         }
     });
 
